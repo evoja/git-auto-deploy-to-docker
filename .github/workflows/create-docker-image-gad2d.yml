@@ -1,0 +1,54 @@
+name: Build GAD2D image (main image)
+on:
+  push:
+    branches:
+      - master
+      - dev*
+    tags:
+      - gad2d/*
+
+jobs:
+  push_to_registry:
+    name: Build docker image and push to GitHub Packages
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_PUSH: >-
+        ${{
+          startsWith(github.ref, 'refs/tags/gad2d/')
+          || github.ref == 'refs/heads/master'
+          || endsWith(github.ref, '-push')
+        }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Show docker and docker-compose versions
+        run: |
+          docker --version
+          docker-compose --version
+
+      - name: Calculate environments
+        run: |
+          echo IMAGE_REPO=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
+          echo IMAGE_TAG=$(./image-gad2d/docker-tag.sh ${{github.ref}}) >> $GITHUB_ENV
+
+      - name: Calculate images full name
+        run: |
+          echo IMAGE=docker.pkg.github.com/$IMAGE_REPO/gad2d:$IMAGE_TAG >> $GITHUB_ENV
+
+      - name: Login to GitHub Packages Docker Registry
+        run: |
+          docker login docker.pkg.github.com -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        run: |
+          docker build \
+              --rm \
+              -f image-gad2d/Dockerfile \
+              -t $IMAGE \
+              image-gad2d
+
+      - name: Push to GitHub Packages
+        if: ${{ env.IMAGE_PUSH == 'true' }}
+        run: |
+          docker push $IMAGE
