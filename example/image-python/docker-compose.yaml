@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  python:
+    image: docker.pkg.github.com/evoja/git-auto-deploy-to-docker/example-python:${TAG}
+    ports:
+      - target: 8000
+        published: 9002
+        protocol: tcp
+        mode: ingress
