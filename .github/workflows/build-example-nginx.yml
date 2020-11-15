@@ -15,7 +15,7 @@ jobs:
       - name: Calculate environments
         run: |
           echo IMAGE_REPO=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
-          echo IMAGE_TAG=$(./.github/workflows/docker-tag.sh ${{github.ref}}) >> $GITHUB_ENV
+          echo IMAGE_TAG=$(./image-gad2d/docker-tag.sh ${{github.ref}}) >> $GITHUB_ENV
 
       - name: Calculate images full names
         run: |
