@@ -1,0 +1,4 @@
+/example/*/instance-specific/keys/deploy_rsa
+/example/*/instance-specific/keys/ssh-config
+/example/*/instance-specific/secrets/docker-compose.env
+/example/*/instance-specific/secrets/registry-password.txt

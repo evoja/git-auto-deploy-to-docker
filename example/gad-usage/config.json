@@ -1,0 +1,59 @@
+{
+  "=HTTP server options": "=",
+  "http-enabled": true,
+  "http-host": "0.0.0.0",
+  "http-port": 8080,
+
+  "https-enabled": false,
+  "wss-enabled": false,
+
+  "=Web user interface options": "=",
+  "web-ui-enabled": false,
+
+  "=File to store a copy of the console output": "=",
+  "log-file": "/app/gitautodeploy.log",
+
+  "=File to store the process id (pid)": "=",
+  "pid-file": "/app/.gitautodeploy.pid",
+
+  "=Record all log levels by default": "=",
+  "log-level": "INFO",
+
+  "=Deploy commands that should be executed for all projects": "=",
+  "global_deploy": [
+    "echo Deploy started!",
+    "echo Deploy completed!"
+  ],
+
+  "repositories": [
+    {
+      "url": "git@github.com:evoja/git-auto-deploy-to-docker.git",
+      "branch": "ep-latest",
+      "remote": "origin",
+      "path": "/app/repositories/python-server",
+      "deploy": "/app/deploy.sh gad-example-python ./example/image-python/docker-compose.yaml ep.*",
+      "header-filter": {
+        "X-GitHub-Event": "push"
+      },
+      "payload-filter": [
+        {
+          "ref": "refs/heads/ep-latest"
+        }
+      ]
+    }, {
+      "url": "git@github.com:evoja/git-auto-deploy-to-docker.git",
+      "branch": "en-latest",
+      "remote": "origin",
+      "path": "/app/repositories/nginx-server",
+      "deploy": "/app/deploy.sh gad-example-nginx ./example/image-nginx/docker-compose.yaml en.*",
+      "header-filter": {
+        "X-GitHub-Event": "push"
+      },
+      "payload-filter": [
+        {
+          "ref": "refs/heads/en-latest"
+        }
+      ]
+    }
+  ]
+}

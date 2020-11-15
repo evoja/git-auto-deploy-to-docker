@@ -1,0 +1,3 @@
+Host some-alias example.org
+Hostname example.org
+IdentityFile /creds/keys/deploy_rsa
