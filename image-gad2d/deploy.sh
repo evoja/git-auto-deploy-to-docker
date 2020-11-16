@@ -20,6 +20,11 @@ docker-compose -f $COMPOSE_FILE config \
 
 cat $SECRETS/registry-password.txt | \
     docker login --password-stdin --username $REGISTRY_LOGIN $REGISTRY
+echo "Trying to remove stack $NAME"
+docker stack rm $NAME
+echo "Sleeping for 5s"
+sleep 5s & wait ${!}
+echo "Deploying stack $NAME"
 docker stack deploy --with-registry-auth \
     --prune \
     -c $DIR/docker-compose.result.yaml \
