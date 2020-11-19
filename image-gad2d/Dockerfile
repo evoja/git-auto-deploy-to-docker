@@ -15,8 +15,8 @@ ENV \
 
 COPY init.sh /home/gad/init.sh
 COPY docker-tag.sh .
-COPY deploy.sh .
+COPY deploy-tag.sh .
 RUN \
     chown -R $GAD_USER:$GAD_USER . && \
-    chown $GAD_USER:$GAD_USER ./deploy.sh /home/gad/init.sh
+    chown $GAD_USER:$GAD_USER ./deploy-tag.sh /home/gad/init.sh
 USER $GAD_USER
