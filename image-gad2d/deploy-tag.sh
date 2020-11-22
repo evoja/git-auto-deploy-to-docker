@@ -14,7 +14,7 @@ echo "compose file: $COMPOSE_FILE"
 
 export $(cat $SECRETS/docker-compose.env | grep -v "^#\|^$" | xargs)
 #export COMMIT=$(git rev-parse HEAD)
-export TAG=$($DIR/docker-tag.sh $(git tag -l --points-at HEAD | grep ${TAGREGEX} | head -n1))
+export TAG=$($DIR/docker-tag.sh $(git tag -l --points-at HEAD | grep -E "${TAGREGEX}" | head -n1))
 echo "TAG: $TAG"
 docker-compose -f $COMPOSE_FILE config \
                > $DIR/docker-compose.result.yaml
