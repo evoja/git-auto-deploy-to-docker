@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/evoja/docker-git-auto-deploy/gitautodeploy-ch:dv-0.17-01
+FROM docker.pkg.github.com/evoja/docker-git-auto-deploy/gitautodeploy-ch:dv-0.17-02
 LABEL maintainer="Chivorotkiv <git@chiv.info>"
 
 ENV DOCKER_GID=999
