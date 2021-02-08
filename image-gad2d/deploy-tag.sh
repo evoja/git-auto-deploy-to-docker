@@ -34,7 +34,7 @@ shift $((OPTIND -1))
 
 REGISTRY=${REGISTRY:-docker.pkg.github.com}
 SLEEP_BEFORE_START=${SLEEP_BEFORE_START:-5s}
-NAME=${NAME:-$(basename ${DIR})}
+NAME=${NAME:-$(basename ${PWD})}
 COMPOSE_FILE=$1
 TAGREGEX=$2
 echo "Script file dir: $DIR"
