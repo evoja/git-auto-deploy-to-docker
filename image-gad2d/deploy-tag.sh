@@ -42,7 +42,7 @@ echo "Execution dir: $PWD"
 echo "Docker registry: $REGISTRY"
 echo "Compose file: $COMPOSE_FILE"
 echo "Stack name: $NAME"
-exit 0
+
 export $(cat $SECRETS/docker-compose.env | grep -v "^#\|^$" | xargs)
 #export COMMIT=$(git rev-parse HEAD)
 export TAG=$($DIR/docker-tag.sh $(git tag -l --points-at HEAD | grep -E "${TAGREGEX}" | head -n1))
