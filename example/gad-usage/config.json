@@ -31,7 +31,7 @@
       "branch": "ep-latest",
       "remote": "origin",
       "path": "/app/repositories/python-server",
-      "deploy": "/app/deploy-tag.sh gad-example-python ./example/image-python/docker-compose.yaml ep.*",
+      "deploy": "/app/deploy-tag.sh -n gad-example-python /app/python-compose.yaml ep.*",
       "header-filter": {
         "X-GitHub-Event": "push"
       },
@@ -44,8 +44,8 @@
       "url": "git@github.com:evoja/git-auto-deploy-to-docker.git",
       "branch": "en-latest",
       "remote": "origin",
-      "path": "/app/repositories/nginx-server",
-      "deploy": "/app/deploy-tag.sh gad-example-nginx ./example/image-nginx/docker-compose.yaml en.*",
+      "path": "/app/repositories/gad-example-nginx",
+      "deploy": "/app/deploy-tag.sh -s 15s /app/nginx-compose.yaml en.*",
       "header-filter": {
         "X-GitHub-Event": "push"
       },

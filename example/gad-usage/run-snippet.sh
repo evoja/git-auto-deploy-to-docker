@@ -1,6 +1,8 @@
 docker run -d \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v ./config.json:/app/config.json \
+    -v ./nginx-compose.yaml:/app/nginx-compose.yaml \
+    -v ./python-compose.yaml:/app/python-compose.yaml \
     -v ./ssh-config:/app/ssh-config \
     -v gad-secrets:/creds/secrets \
     -v gad-keys:/creds/keys \
