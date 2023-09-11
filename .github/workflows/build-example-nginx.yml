@@ -10,7 +10,7 @@ jobs:
     if: ${{startsWith(github.ref, 'refs/tags/en/')}}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Calculate environments
         run: |
